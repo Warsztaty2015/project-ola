@@ -10,84 +10,16 @@
   <div id="screen"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.4.0/two.js"></script>
   <script>
-    var twoLibraryParams = {
-      width: 800,
-      height: 600
-    };
-
-    var boardSize = {
-      width: 30,
-      height: 40
-    };
-    
-    var fieldTypes = {
-      "empty": 0,
-      "snakeBody": 1,
-      "snakeHead": 2,
-      "food": 3
-    };
-    
-    var fieldColors = {
-      "empty": "grey",
-      "snakeBody": "green",
-      "snakeHead": "lightgreen",
-      "food": "yellow"
-    };
-    
-    // initialised by init
-    var revFieldTypes = {};
-
-    // initialised by
-    var board = [];
-    
-    var snake = [];
-
-    var boardIterator = function(forEachElement) {
-      board.forEach(
-        function(row){
-          row.forEach(function(elem){
-            forEachElement(elem);
-          });
-        });
-    };
-    
-    var makeTile = function(x, y, two){
-      var tileWidth = twoLibraryParams.width/boardSize.width;
-      var tileHeight = twoLibraryParams.height/boardSize.height;
-      return two.makePolygon(tileWidth*x, tileHeight*y,
-                             tileWidth*(x+1), tileHeight*(y),
-                             tileWidth*(x+1), tileHeight*(y+1),
-                             tileWidth*(x), tileHeight*(y+1));
-    };
-    
-    var init = function(two) {
-      for (var key in fieldTypes) {
-        revFieldTypes[fieldTypes[key]] = key;
-      }
-      for(var i = 0; i < boardSize.width; i++){
-        var row = [];
-        board.push(row);
-        for(var j = 0; j < boardSize.height; j++){
-          row.push(fieldTypes.empty);
-          var rect = makeTile(i, j, two);
-          rect.fill = fieldColors["empty"];
-        }
-      }
-      two.update();
-    };
-
-    
-    boardIterator(function(elem){console.log(elem)});
     window.onload = function() {
       var screen = document.getElementById("screen");
-      var two = new Two(twoLibraryParams);
+      var two = new Two({width: 800, height: 600});
       two.appendTo(screen);
-      init(two);
-      //var circle = two.makeRectangle(70, 100, 200, 200);
-      two.update()
-      //circle.fill = '#FF8000';
-      //circle.stroke = 'orangered'; // Accepts all valid css color
-      //circle.linewidth = 5;
+      var shape = two.makePolygon(100, 100,
+                                  150, 100,
+                                  150, 150,
+                                  100, 150);
+      shape.fill = "lightblue"
+      two.update();
     };
   </script>
 </body>
