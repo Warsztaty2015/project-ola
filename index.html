@@ -3,23 +3,42 @@
 
 <head>
   <meta charset="utf-8"></meta>
-  <title>Snake</title>
+  <title>wat</title>
 </head>
 
 <body>
   <div id="screen"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.4.0/two.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.4.0/two.js">
+  </script>
   <script>
     window.onload = function() {
       var screen = document.getElementById("screen");
       var two = new Two({width: 800, height: 600});
       two.appendTo(screen);
-      var shape = two.makePolygon(100, 100,
-                                  150, 100,
-                                  150, 150,
-                                  100, 150);
-      shape.fill = "lightblue"
+      var wierzcholekGwiazdy = function(angle){
+        var y = 100 * Math.sin((Math.PI * angle) / 180);
+        var x = 100 * Math.cos((Math.PI * angle) / 180);
+        return [x, y];
+      };
+      
+      var katy = [];
+      
+      var wierzcholki = []; // var wierzcholki = [[30, 95], [70, -30]];
+      
+      for(var i=0; i<5; i=i+1){
+        katy.push(i * 360/5);
+      }
+      
+      for(var i = 0; i < 5; i = i + 1){
+        var wspolrzedne = wierzcholekGwiazdy(katy[i]);
+        wierzcholki.push(wspolrzedne[0]);
+        wierzcholki.push(wspolrzedne[1]);
+      }
+      
+      two.makePolygon.apply(this, wierzcholki)
+      
       two.update();
+
     };
   </script>
 </body>
