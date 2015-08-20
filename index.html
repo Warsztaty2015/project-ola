@@ -29,13 +29,18 @@
         katy.push(i * 360/5);
       }
       
+      
       for(var i = 0; i < 5; i = i + 1){
         var wspolrzedne = wierzcholekGwiazdy(katy[i]);
         wierzcholki.push(wspolrzedne[0]);
         wierzcholki.push(wspolrzedne[1]);
       }
+
+      for(var i = 0; i < wierzcholki.length; i = i + 1){
+        wierzcholki[i] = wierzcholki[i] + 100;
+      }
       
-      two.makePolygon.apply(this, wierzcholki)
+      two.makePolygon.apply(two, wierzcholki);
       
       two.update();
 
